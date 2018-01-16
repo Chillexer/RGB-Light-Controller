@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RGB Controller</title>
+    <link rel="stylesheet" href="C:\Users\frede\Desktop\HomeAutomation\lib\Bootstrap-v4\css\bootstrap.min.css">
+    <link rel="stylesheet" href="C:\Users\frede\Desktop\HomeAutomation\lib\fontawesome-free-5.0.4\web-fonts-with-css\css\fontawesome-all.min.css">
+    <link rel="stylesheet" href="C:\Users\frede\Desktop\HomeAutomation\style.css"> 
+    <link rel='stylesheet' href='C:\Users\frede\Desktop\HomeAutomation\lib\Spectrum\spectrum.css' />
+    <script src="C:\Users\frede\Desktop\HomeAutomation\lib\jQuery\jquery-3.2.1.min.js"></script>
+    <script src="C:\Users\frede\Desktop\HomeAutomation\lib\PopperJs\PopperJs.js"></script>
+    <script src="C:\Users\frede\Desktop\HomeAutomation\lib\Bootstrap-v4\js\bootstrap.min.js"></script>
+    <script src='C:\Users\frede\Desktop\HomeAutomation\lib\Spectrum\spectrum.js'></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-left mt-3"><i class="fa fa-home" aria-hidden="true"></i> Værelse</h1>
+        <div class="square" id="rgb_bord">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-lightbulb fa-6x"></i>
+                        <p>RGB BORD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="square" id="rgb_seng">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-lightbulb fa-6x"></i>
+                        <p>RGB REOL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="square" id="rgb_reol">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-lightbulb fa-6x"></i>
+                        <p>RGB SENG</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle">
+            <div class="content-nopadding">
+                    <div class="btn-group btn-group-vertical"  id="btn-layout">
+                            <button type="button" class="btn btn-lg btn-info">RGB BORD</button>
+                            <button type="button" class="btn btn-lg btn-primary">RGB REOL</button>
+                            <button type="button" class="btn btn-lg btn-primary">RGB SENG</button>
+                </div>
+            </div>
+            <div class="content-nopadding-right">
+                    <input type='text' id="flat" style="width: 100%;" />
+            </div>
+           
+        </div>
+        <div class="square">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-cog fa-6x"></i>
+                        <p>SETTINGS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="C:\Users\frede\Desktop\HomeAutomation\script.js"></script>
+    <script src="C:\Users\frede\Desktop\HomeAutomation\spectrum.js"></script>
+</body>
+
+</html>
