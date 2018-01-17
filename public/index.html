@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>RGB Controller</title>
+    <link rel="stylesheet" href="lib\Bootstrap-v4\css\bootstrap.min.css">
+    <link rel="stylesheet" href="lib\fontawesome-free-5.0.4\web-fonts-with-css\css\fontawesome-all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href="lib\Spectrum\spectrum.css" />
+    <script src="lib\jQuery\jquery-3.2.1.min.js"></script>
+    <script src="lib\PopperJs\PopperJs.js"></script>
+    <script src="lib\Bootstrap-v4\js\bootstrap.min.js"></script>
+    <script src='lib\Spectrum\spectrum.js'></script>
+    <script src="http://192.168.1.16/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-left mt-3">
+            <i class="fa fa-home" aria-hidden="true"></i> Værelse</h1>
+        <div class="square" id="rgb_bord">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-lightbulb fa-6x"></i>
+                        <p>RGB BORD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="square" id="rgb_seng">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-lightbulb fa-6x"></i>
+                        <p>RGB REOL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="square" id="rgb_reol">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-lightbulb fa-6x"></i>
+                        <p>RGB SENG</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rectangle">
+            <div class="content-nopadding">
+                <div class="btn-group btn-group-vertical" id="btn-layout">
+                    <button type="button" class="btn btn-lg btn-info">RGB BORD</button>
+                    <button type="button" class="btn btn-lg btn-primary">RGB REOL</button>
+                    <button type="button" class="btn btn-lg btn-primary">RGB SENG</button>
+                </div>
+            </div>
+            <div class="content-nopadding-right">
+                <input type='text' id="flat" style="width: 100%;" />
+            </div>
+        </div>
+        <div class="square">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <i class="fas fa-cog fa-6x"></i>
+                        <p>SETTINGS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="spectrum.js"></script>
+</body>
+
+</html>
