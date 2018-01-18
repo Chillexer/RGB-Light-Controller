@@ -53,7 +53,7 @@ for (var index = 0; index < keys.length; index++) {
 }
 }
 
-server.listen("192.168.1.55", function() {
+server.listen(process.env.PORT, "192.168.1.55", function() {
     console.log("Server has started!");
 });
 
