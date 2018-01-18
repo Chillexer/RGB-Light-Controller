@@ -42,18 +42,15 @@ function SendChange(item){
 function GetChange(obj){
 var keys = Object.keys(obj);
 var counter = 0;
-obj.forEach(element => {
-    var count = 0;
-    var key = Object.keys(element);
-    element.forEach(data => {
-        if(data != Lights[keys[counter]][key[count]]) {
-            console.log(data);
-            return data;
-        }
-     count ++;   
-    });
-    counter ++;
-});
+for (let index = 0; index < keys.length; index++) {
+    var key = Object.keys(obj[keys[index]]);
+    for (let i = 0; i <key.length; i++) {
+        if(obj[keys[index]][key[i]]!= Lights[keys[index]][key[i]]) {
+            console.log(obj[keys[index]][key[i]]);
+            return obj[keys[index]][key[i]];
+        }   
+    }   
+}
 }
 
 server.listen(4000,"192.168.1.55", function() {
