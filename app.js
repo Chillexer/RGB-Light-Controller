@@ -2,10 +2,10 @@ var fs = require('fs');
 var express = require("express"), app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var mqtt = require('mqtt');
 var Lights = JSON.parse(fs.readFileSync(__dirname + "/files/Lights.json", "utf8"));
-var mqtt = require('mqtt')
 var options = JSON.parse(fs.readFileSync(__dirname + "/files/Login.json", "utf8"));
-var client  = mqtt.connect('mqtt://192.168.1.55:5000', options);
+var client  = mqtt.connect('mqtt://192.168.1.55', options);
 
 client.on('connect', function () {
     client.subscribe('topic/test');
