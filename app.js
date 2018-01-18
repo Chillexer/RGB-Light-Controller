@@ -42,9 +42,9 @@ function SendChange(item){
 function GetChange(obj){
 var keys = Object.keys(obj);
 var counter = 0;
-for (let index = 0; index < keys.length; index++) {
+for (var index = 0; index < keys.length; index++) {
     var key = Object.keys(obj[keys[index]]);
-    for (let i = 0; i <key.length; i++) {
+    for (var i = 0; i <key.length; i++) {
         if(obj[keys[index]][key[i]]!= Lights[keys[index]][key[i]]) {
             console.log(obj[keys[index]][key[i]]);
             return obj[keys[index]][key[i]];
