@@ -3,7 +3,7 @@ var names = ["Bord", "Reol", "Seng"];
 var RGBButtons = $(".btn");
 var Lights = {};
 var btncreated = false;
-var socket = io.connect('http://192.168.1.16:80');
+var socket = io.connect('http://2.106.165.194');
 
   socket.on("LightsToClient", function (data) {
     console.log(data);
