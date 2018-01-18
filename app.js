@@ -7,14 +7,13 @@ var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://192.168.1.55:5000');
 
 client.on('connect', function () {
-    client.subscribe('topic/test')
-    client.publish('topic/test', 'Hello mqtt')
+    client.subscribe('topic/test');
+    client.publish('topic/test', 'Hello mqtt');
   });
    
   client.on('message', function (topic, message) {
     // message is Buffer
-    console.log(message.toString())
-    client.end()
+    console.log(message.toString());
   });
 
 app.use(express.static(__dirname + "/public"));
@@ -30,11 +29,28 @@ app.get("/", function (req, res) {
     socket.on('LightsToServer', function (data) {
         var json = JSON.stringify(data);
         fs.writeFile(__dirname + '/files/Lights.json', json, 'utf8',function(){
+            SendChange(GetChange(data));
             Lights = data;
             socket.broadcast.emit('LightsToClient', Lights);
         });
     });
 });
+function GetChange(obj){
+var keys = Object.keys(obj);
+var counter = 0;
+obj.forEach(element => {
+    var count = 0;
+    var key = Object.keys(element);
+    element.forEach(data => {
+        if(data != Lights[keys[counter]][key[count]]) {
+            console.log(data);
+            return data;
+        }
+     count ++;   
+    });
+    counter ++;
+});
+}
 
 server.listen(4000,"192.168.1.55", function() {
     console.log("Server has started!");
