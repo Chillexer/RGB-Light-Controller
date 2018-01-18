@@ -37,7 +37,7 @@ function createRGBBtn(i){
       if (this.classList.contains("btn-primary")) {
         $(".btn").removeClass("btn-info");
         $(".btn").addClass("btn-primary");
-        this.classList.removeClass("btn-primary");
+        this.classList.remove("btn-primary");
         this.classList.add("btn-info");
         setRGBValue(this);
       }
