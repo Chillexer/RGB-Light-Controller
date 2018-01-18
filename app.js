@@ -4,7 +4,8 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var Lights = JSON.parse(fs.readFileSync(__dirname + "/files/Lights.json", "utf8"));
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://192.168.1.55:5000');
+var options = JSON.parse(fs.readFileSync(__dirname + "/files/Login.json", "utf8"));
+var client  = mqtt.connect('mqtt://192.168.1.55:5000', options);
 
 client.on('connect', function () {
     client.subscribe('topic/test');
