@@ -3,6 +3,19 @@ var express = require("express"), app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var Lights = JSON.parse(fs.readFileSync(__dirname + "/files/Lights.json", "utf8"));
+var mqtt = require('mqtt')
+var client  = mqtt.connect('mqtt://192.168.1.55:5000');
+
+client.on('connect', function () {
+    client.subscribe('topic/test')
+    client.publish('topic/test', 'Hello mqtt')
+  });
+   
+  client.on('message', function (topic, message) {
+    // message is Buffer
+    console.log(message.toString())
+    client.end()
+  });
 
 app.use(express.static(__dirname + "/public"));
 
