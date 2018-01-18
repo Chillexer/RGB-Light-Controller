@@ -35,6 +35,10 @@ app.get("/", function (req, res) {
         });
     });
 });
+function SendChange(item){
+    client.publish('topic/test', item);
+}
+
 function GetChange(obj){
 var keys = Object.keys(obj);
 var counter = 0;
