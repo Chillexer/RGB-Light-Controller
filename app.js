@@ -8,10 +8,13 @@ var client  = mqtt.connect('mqtt://192.168.1.55:5000');
 
 client.on('connect', function () {
     client.subscribe('topic/test');
-    client.publish('topic/test', 'Hello mqtt');
   });
    
   client.on('message', function (topic, message) {
+    var test = JSON.parse(message);
+    test.forEach(element => {
+        console.log(element);
+    });  
     // message is Buffer
     console.log(message.toString());
   });
