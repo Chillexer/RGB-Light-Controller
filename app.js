@@ -11,11 +11,8 @@ client.on('connect', function () {
   });
    
   client.on('message', function (topic, message) {
-    var test = JSON.parse(message.toString());
-        console.log(test.length);
-
     // message is Buffer
-    console.log(message.toString());
+    console.log(JSON.parse(message));
   });
 
 app.use(express.static(__dirname + "/public"));
