@@ -8,12 +8,24 @@ var options = JSON.parse(fs.readFileSync(__dirname + "/files/Login.json", "utf8"
 var client  = mqtt.connect('mqtt://192.168.1.55', options);
 
 client.on('connect', function () {
-    client.subscribe('topic/test');
+    client.subscribe("RequestData");
+    client.subscribe("test");
   });
    
   client.on('message', function (topic, message) {
-    // message is Buffer
-    console.log(JSON.parse(message));
+     if(topic == "RequestData"){
+        var lights = Lights
+        if(message == "seng/bord"){
+            delete lights.Reol;
+            client.publish('seng/bord/data', lights.Seng.LightisOn + ":" + lights.Seng.RGB + ":" + lights.Bord.LightisOn + ":" + lights.Bord.RGB);
+        } else if (message == "reol"){
+            delete lights.Seng;
+            delete lights.Bord;
+            client.publish('reol/data', lights.Reol.LightisOn + ":" + lights.Reol.RGB );
+        }
+    }
+    console.log("message");
+    
   });
 
 app.use(express.static(__dirname + "/public"));
@@ -36,7 +48,12 @@ app.get("/", function (req, res) {
     });
 });
 function SendChange(item){
-    client.publish('topic/test', JSON.stringify(item));
+    if(item[0] == "Bord" && item[0] == "Seng"){
+        client.publish('seng/bord', JSON.stringify(item));
+    }
+    else{
+        client.publish('reol', JSON.stringify(item));
+    }
 }
 
 function GetChange(obj){
