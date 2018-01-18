@@ -36,7 +36,7 @@ app.get("/", function (req, res) {
     });
 });
 function SendChange(item){
-    client.publish('topic/test', item);
+    client.publish('topic/test', JSON.stringify(item));
 }
 
 function GetChange(obj){
@@ -46,8 +46,7 @@ for (var index = 0; index < keys.length; index++) {
     var key = Object.keys(obj[keys[index]]);
     for (var i = 0; i <key.length; i++) {
         if(obj[keys[index]][key[i]]!== Lights[keys[index]][key[i]]) {
-            var string = keys[index] + ", " + key[i] + ", " + obj[keys[index]][key[i]]
-            console.log(string);
+            var string = [keys[index] , key[i] , obj[keys[index]][key[i]]];
             return string.toString();
         }   
     }   
