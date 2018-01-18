@@ -47,7 +47,7 @@ for (var index = 0; index < keys.length; index++) {
     for (var i = 0; i <key.length; i++) {
         if(obj[keys[index]][key[i]]!== Lights[keys[index]][key[i]]) {
             console.log(obj[keys[index]][key[i]]);
-            return obj[keys[index]][key[i]];
+            return obj[keys[index]][key[i]].toString();
         }   
     }   
 }
