@@ -45,7 +45,7 @@ function SendChange(item){
     }
     item[2]["RGB"]  =  item[2]["RGB"].match(/\d+/g);
     for (var index = 0; index < item[2]["RGB"].length; index++) {
-        item[2]["RGB"][index] =  item[2]["RGB"][index].parseInt();
+        item[2]["RGB"][index] =  parseInt(item[2]["RGB"][index]);
     }
     if(item[0] == "Bord"){
         client.publish('bord', JSON.stringify(item[2]));
