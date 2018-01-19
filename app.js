@@ -37,6 +37,7 @@ app.get("/", function (req, res) {
     });
 });
 function SendChange(item){
+    console.log(item.toString());
     if (item[2]["LightisOn"] == true){
         item[2]["LightisOn"] = 1;
     }else if(item[2]["LightisOn"] == false){
