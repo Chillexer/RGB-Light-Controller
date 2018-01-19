@@ -61,11 +61,12 @@ function SendChange(item){
 
 function GetChange(obj){
 var keys = Object.keys(obj);
-var counter = 0;
 for (var index = 0; index < keys.length; index++) {
     var key = Object.keys(obj[keys[index]]);
     for (var i = 0; i <key.length; i++) {
-        if(obj[keys[index]][key[i]]!== Lights[keys[index]][key[i]]) {
+        if(obj[keys[index]][key[i]]!= Lights[keys[index]][key[i]]) {
+            console.log(obj[keys[index]][key[i]]);
+            console.log(Lights[keys[index]][key[i]]);
             var string = [keys[index] , key[i] , obj[keys[index]]];
             return string;
         }   
