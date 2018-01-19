@@ -48,13 +48,13 @@ function SendChange(item){
         item[2] = item[2].replace(" ", "");
     }
     if(item[0] == "Bord"){
-        client.publish('bord', item[2].toString());
+        client.publish('bord', JSON.stringify(item[2]));
     }
     else if( item[0] == "Seng"){
-        client.publish('seng', item[2].toString());
+        client.publish('seng', JSON.stringify(item[2]));
     }
     else{
-        client.publish('reol', item[2].toString());
+        client.publish('reol', JSON.stringify(item[2]));
     }
 }
 
