@@ -8,24 +8,13 @@ var options = JSON.parse(fs.readFileSync(__dirname + "/files/Login.json", "utf8"
 var client  = mqtt.connect('mqtt://192.168.1.55', options);
 
 client.on('connect', function () {
-    client.subscribe("RequestData");
-    client.subscribe("test");
+    client.subscribe("bord");
+    client.subscribe("seng");
+    client.subscribe("reol");
   });
    
   client.on('message', function (topic, message) {
-     if(topic == "RequestData"){
-        var lights = Lights
-        if(message == "seng/bord"){
-            delete lights.Reol;
-            client.publish('seng/bord/data', lights.Seng.LightisOn + ":" + lights.Seng.RGB + ":" + lights.Bord.LightisOn + ":" + lights.Bord.RGB);
-        } else if (message == "reol"){
-            delete lights.Seng;
-            delete lights.Bord;
-            client.publish('reol/data', lights.Reol.LightisOn + ":" + lights.Reol.RGB );
-        }
-    }
     console.log("message");
-    
   });
 
 app.use(express.static(__dirname + "/public"));
@@ -48,11 +37,24 @@ app.get("/", function (req, res) {
     });
 });
 function SendChange(item){
-    if(item[0] == "Bord" && item[0] == "Seng"){
-        client.publish('seng/bord', JSON.stringify(item));
+    if (item[2] == true){
+        item[2] = 1;
+    }else if(item[2] == false){
+        item[2] = 0;
     }
     else{
-        client.publish('reol', JSON.stringify(item));
+        item[2] = item[2].replace("rgb(", "");
+        item[2] = item[2].replace(")", "");
+        item[2] = item[2].replace(" ", "");
+    }
+    if(item[0] == "Bord"){
+        client.publish('bord', item[2].toString());
+    }
+    else if( item[0] == "Seng"){
+        client.publish('seng', item[2].toString());
+    }
+    else{
+        client.publish('reol', item[2].toString());
     }
 }
 
