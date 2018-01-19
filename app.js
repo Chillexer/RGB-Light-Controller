@@ -14,7 +14,7 @@ client.on('connect', function () {
   });
    
   client.on('message', function (topic, message) {
-    console.log(message.toString());
+    console.log(topic.toString() + " " + message.toString());
   });
 
 app.use(express.static(__dirname + "/public"));
