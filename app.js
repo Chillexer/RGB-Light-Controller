@@ -27,14 +27,13 @@ app.get("/", function (req, res) {
 
  io.on('connection', function (socket) {
     socket.emit('LightsToClient', Lights);
-});
-
-socket.on('LightsToServer', function (data) {
-    var json = JSON.stringify(data);
-    fs.writeFile(__dirname + '/files/Lights.json', json, 'utf8',function(){
-        SendChange(GetChange(data));
-        Lights = data;
-        socket.broadcast.emit('LightsToClient', Lights);
+    socket.on('LightsToServer', function (data) {
+        var json = JSON.stringify(data);
+        fs.writeFile(__dirname + '/files/Lights.json', json, 'utf8',function(){
+            SendChange(GetChange(data));
+            Lights = data;
+            socket.broadcast.emit('LightsToClient', Lights);
+        });
     });
 });
 
