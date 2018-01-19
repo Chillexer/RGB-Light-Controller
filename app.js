@@ -14,7 +14,7 @@ client.on('connect', function () {
   });
    
   client.on('message', function (topic, message) {
-    console.log(message.payload.decode());
+    console.log(message.payload);
   });
 
 app.use(express.static(__dirname + "/public"));
