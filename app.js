@@ -37,17 +37,13 @@ app.get("/", function (req, res) {
     });
 });
 function SendChange(item){
-    if (item[2] == true){
-        item[2] = 1;
-    }else if(item[2] == false){
-        item[2] = 0;
+    if (item[2]["LightisOn"] == true){
+        item[2]["LightisOn"] = 1;
+    }else if(item[2]["LightisOn"] == false){
+        item[2]["LightisOn"] = 0;
     }
-    else{
-        item[2] = item[2].replace("rgb(", "");
-        item[2] = item[2].replace(")", "");
-        item[2] = item[2].replace(" ", "");
-        item[2] = item[2].replace(" ", "");
-    }
+    item[2]["RGB"]  =  item[2]["RGB"].match(/\d+/g);
+    console.log( item[2]["RGB"] );
     if(item[0] == "Bord"){
         client.publish('bord', JSON.stringify(item[2]));
     }
@@ -66,7 +62,7 @@ for (var index = 0; index < keys.length; index++) {
     var key = Object.keys(obj[keys[index]]);
     for (var i = 0; i <key.length; i++) {
         if(obj[keys[index]][key[i]]!== Lights[keys[index]][key[i]]) {
-            var string = [keys[index] , key[i] , obj[keys[index]][key[i]]];
+            var string = [keys[index] , key[i] , obj[keys[index]]];
             return string;
         }   
     }   
