@@ -46,6 +46,7 @@ function SendChange(item){
         item[2] = item[2].replace("rgb(", "");
         item[2] = item[2].replace(")", "");
         item[2] = item[2].replace(" ", "");
+        item[2] = item[2].replace(" ", "");
     }
     if(item[0] == "Bord"){
         client.publish('bord', JSON.stringify(item[2]));
