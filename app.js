@@ -42,7 +42,7 @@ function SendChange(item){
     }else if(item[2]["LightisOn"] == false){
         item[2]["LightisOn"] = 0;
     }
-    item[2]["RGB"]  =  item[2]["RGB"].match(/\d+/g);
+    item[2]["RGB"]  =  int(item[2]["RGB"].match(/\d+/g));
     console.log( item[2]["RGB"] );
     if(item[0] == "Bord"){
         client.publish('bord', JSON.stringify(item[2]));
