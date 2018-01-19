@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
 });
 
 function SendChange(items){
-    item = new items;
+    item = Object.assign(items);
     console.log(item.toString());
     if (item[2]["LightisOn"] == true){
         item[2]["LightisOn"] = 1;
