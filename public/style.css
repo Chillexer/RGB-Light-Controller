@@ -24,7 +24,7 @@ h1 {
 .rectangle {
     float: left;
     position: relative;
-    width: 63.33%;
+    width: 96.64%;
     padding-bottom: 30%;
     margin: 1.66%;
     background-color: #007bff;
@@ -150,7 +150,7 @@ i {
 .content-nopadding {
     position: absolute;
     height: 100%;
-    width: 47.33%;
+    width: 33.33%;
 }
 
 .btn-group-vertical .btn,
@@ -158,11 +158,23 @@ i {
     height: 100%;
 }
 
-.content-nopadding-right {
+.content-nopadding-center {
     position: absolute;
     height: 100%;
-    width: 53.66%;
-    margin-left: 47.33%;
+    width: 36%;
+    margin-left: 33.33%;
+    margin-right: 0;
+    padding-top: auto;
+    vertical-align: middle;
+    background: #007bff;
+}
+.content-nopadding-right{
+    position: absolute;
+    height: 100%;
+    margin-top: 10%;
+    font-size: 30px;
+    width: 36%;
+    margin-left: 66.66%;
     margin-right: 0;
     padding-top: auto;
     vertical-align: middle;

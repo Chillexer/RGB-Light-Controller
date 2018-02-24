@@ -51,31 +51,9 @@
                 <div class="table">
                     <div class="table-cell">
                         <i class="fas fa-lightbulb fa-6x"></i>
-                        <p>RGB REOL</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="square" id="rgb_reol">
-            <div class="content">
-                <div class="table">
-                    <div class="table-cell">
-                        <i class="fas fa-lightbulb fa-6x"></i>
                         <p>RGB SENG</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="rectangle">
-            <div class="content-nopadding">
-                <div class="btn-group btn-group-vertical" id="btn-layout">
-                    <button type="button" class="btn btn-lg btn-info">RGB BORD</button>
-                    <button type="button" class="btn btn-lg btn-primary">RGB REOL</button>
-                    <button type="button" class="btn btn-lg btn-primary">RGB SENG</button>
-                </div>
-            </div>
-            <div class="content-nopadding-right">
-                <input type='text' id="flat" style="width: 100%;" />
             </div>
         </div>
         <div class="square">
@@ -86,6 +64,26 @@
                         <p>SETTINGS</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="rectangle">
+            <div class="content-nopadding">
+                <div class="btn-group btn-group-vertical" id="btn-layout">
+                    <button type="button" value="bord" class="btn btn-lg btn-info">RGB BORD</button>
+                    <button type="button" value="seng" class="btn btn-lg btn-primary">RGB SENG</button>
+                </div>
+            </div>
+            <div class="content-nopadding-center">
+                <input type='text' id="flat" style="width: 100%;" />
+            </div>
+            <div class="content-nopadding-right">
+                <label for="Mode">Select Mode</label>
+                <br>
+                <select name="Mode" id="modeselect" class="">
+                    <option value="none">None</option>
+                    <option value="pulse">Pulse</option>
+                    <option value="fade">Fade</option>
+                </select>
             </div>
         </div>
     </div>

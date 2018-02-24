@@ -1,18 +1,32 @@
-var bulbs = ["rgb_bord", "rgb_seng", "rgb_reol"];
-var names = ["Bord", "Reol", "Seng"];
+var bulbs = ["rgb_bord", "rgb_seng"];
+var names = ["Bord", "Seng"];
 var RGBButtons = $(".btn");
 var Lights = {};
+var Modes = {};
 var btncreated = false;
-var socket = io.connect('http://2.106.165.194');
+var socket = io.connect('http://192.168.1.22:4000');//skal være http://2.106.165.194 på live
 
   socket.on("LightsToClient", function (data) {
     console.log(data);
     Lights = data;
     init();
   });
+  socket.on("LightSetting", function (data){
+    console.log(data);
+    Modes = data;
+    $("#modeselect").change(function() {
+      var ddl = document.getElementById("modeselect"); 
+      Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]].mode = ddl.value;
+      var name = names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])];
+      var obj ="{\"" + name + "\":" + JSON.stringify(Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]]) + "}"
+      var set = JSON.parse(obj);
+           console.log(set);
+      socket.emit("LightSetting", set);
+    });
+  });
 
 function init(){
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 2; i++) {
     var bulb =$("#"+bulbs[i] +" .fas");
     checkLights(bulb, i);
     setRGBValue(RGBButtons[i]);
@@ -69,5 +83,7 @@ function checkLights(bulb, i){
 function setRGBValue(index){
   if(index.classList.contains("btn-info")){
     $("#flat").spectrum("set", Lights[names[RGBButtons.index(index)]].RGB);
+    var ddl = document.getElementById("modeselect");
+    ddl.value = Modes[names[RGBButtons.index(index)]].mode;
   }
 }
