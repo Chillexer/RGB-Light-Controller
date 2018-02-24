@@ -39,12 +39,25 @@ app.get("/", function (req, res) {
     });
     socket.on('LightSetting', function (data){
         var json = JSON.stringify(data);
-        console.log(json); // skal kunne køre en function der ændre farver udfra hvilken mode
-        fademode(data);
+         // skal kunne køre en function der ændre farver udfra hvilken mode
+         var key = Object.keys(data);
+         Modes[key[0]] = data[key[0]];
+         if(data[key[0]]["mode"] == "fade"){
+            fademode(data,key);
+         }
+         else if (data[key[0]]["mode"] == "pulse"){
+             pulsemode(data, key);
+         }
+         else{
+            var rgbarr = [key[0], "RGB", Lights[key[0]]];
+            SendChange(rgbarr);
+         }
+        console.log(json);
     });
 });
 
 function SendChange(items){
+    console.log(items);
     item = JSON.parse(JSON.stringify(items));
     if (item[2]["LightisOn"] == true){
         item[2]["LightisOn"] = 1;
@@ -55,8 +68,8 @@ function SendChange(items){
     for (var index = 0; index < item[2]["RGB"].length; index++) {
         item[2]["RGB"][index] =  parseInt(item[2]["RGB"][index]);
     }
-    console.log(JSON.stringify(item[2]));
     if(item[0] == "Bord"){
+        console.log(JSON.stringify(item[2]));
         client.publish('bord', JSON.stringify(item[2]));
     }
     else if( item[0] == "Seng"){
@@ -77,14 +90,48 @@ function GetChange(obj){
     }
 }
 
-//async function pulsemode(data){
+async function pulsemode(data, key){
 
-//}
-async function fademode(data){
-    var key = Object.keys(data);
-    console.log(key);
+}
+async function fademode(data, key){
     var seprgb = rgbseperator(Lights[key[0]]["RGB"]);
-    console.log(seprgb);
+    var mappingvalue = seprgb[3];
+    var schema = [[1,0],[2,1],[0,2]]
+    var loc = false;
+    while(Modes[key[0]]["mode"] == "fade" && Lights[key[0]]["LightisOn"]){
+        for (let i = 0;i < 3;i++) {
+            for (let it = 0; it < 255; it++) {
+                if(Modes[key[0]]["mode"] != "fade" || !Lights[key[0]]["LightisOn"])
+                return;
+                if((seprgb[schema[i][0]] == it && seprgb[schema[i][1]] == 255) || loc){
+                    if(!loc) console.log("found");
+                    loc = true;
+                    if(seprgb[schema[i][0]] == 255) continue;
+                    seprgb[schema[i][0]] ++;
+                    var send = "{\"LightisOn\":1,\"RGB\":[" + seprgb[0] +"," + seprgb[1] + "," + seprgb[2] + "]}"
+                    client.publish(key[0].toLowerCase(),send);
+                await sleep(50);
+                }
+            } 
+            for (let it = 0; it < 255; it++) {
+                if(Modes[key[0]]["mode"] != "fade" || !Lights[key[0]]["LightisOn"])
+                return;
+                if((seprgb[schema[i][1]] == it && seprgb[schema[i][0]] == 255) || loc){
+                    if(!loc) console.log("found");
+                    loc = true;
+                    if(seprgb[schema[i][1]] == 0) continue;
+                    seprgb[schema[i][1]] --;
+                    var send = "{\"LightisOn\":1,\"RGB\":[" + seprgb[0] +"," + seprgb[1] + "," + seprgb[2] + "]}"
+                    client.publish(key[0].toLowerCase(),send);
+                await sleep(50);
+                }
+            }      
+                
+        }
+        console.log("test");
+    }
+    console.log("worked");
+    return;
 }
 
 function rgbseperator(rgb){
@@ -94,9 +141,23 @@ function rgbseperator(rgb){
     rgb = rgb.substring(rgb.indexOf(",") + 1, rgb.length);
     var b = parseInt(rgb.substring(0, rgb.indexOf(")")));
     var highestval = [r,g,b];
-    var values = [r,g,b,highestval.sort()[2]];
+    var values = [r,g,b,highestval.sort(sortNumber)[2]];
+    values[0] = Math.round(map_range(r,0,values[3],0,255));
+    values[1] = Math.round(map_range(g,0,values[3],0,255));
+    values[2] = Math.round(map_range(b,0,values[3],0,255));
     return values;
 }
+
+function sortNumber(a,b) {
+    return a - b;
+}
+
+function map_range(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 server.listen(4000, "192.168.1.22", function() {
     console.log("Server has started!");

@@ -21,5 +21,8 @@
     "fs": "0.0.1-security",
     "mqtt": "^2.15.1",
     "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1"
   }
 }
