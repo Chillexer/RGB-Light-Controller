@@ -42,6 +42,8 @@ app.get("/", function (req, res) {
          // skal kunne køre en function der ændre farver udfra hvilken mode
          var key = Object.keys(data);
          Modes[key[0]] = data[key[0]];
+         socket.broadcast.emit('LightSetting', Modes);
+         socket.broadcast.emit('LightsToClient', Lights);
          if(data[key[0]]["mode"] == "fade"){
             fademode(data,key);
          }
@@ -159,7 +161,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-server.listen(4000, "192.168.1.22", function() {
+server.listen(4000, "192.168.1.55", function() {
     console.log("Server has started!");
 });
 

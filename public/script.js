@@ -4,7 +4,8 @@ var RGBButtons = $(".btn");
 var Lights = {};
 var Modes = {};
 var btncreated = false;
-var socket = io.connect('http://192.168.1.22:4000');//skal være http://2.106.165.194 på live
+var switchcreated = false;
+var socket = io.connect('http://2.106.165.194');//skal være http://2.106.165.194 på live
 
   socket.on("LightsToClient", function (data) {
     console.log(data);
@@ -14,15 +15,22 @@ var socket = io.connect('http://192.168.1.22:4000');//skal være http://2.106.16
   socket.on("LightSetting", function (data){
     console.log(data);
     Modes = data;
-    $("#modeselect").change(function() {
-      var ddl = document.getElementById("modeselect"); 
-      Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]].mode = ddl.value;
-      var name = names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])];
-      var obj ="{\"" + name + "\":" + JSON.stringify(Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]]) + "}"
-      var set = JSON.parse(obj);
-           console.log(set);
-      socket.emit("LightSetting", set);
-    });
+    var ddl = document.getElementById("modeselect");
+    ddl.value = Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]].mode;
+    ddl.options[RGBButtons.index(document.getElementsByClassName("btn-info")[0])].selected = 'selected';
+    if(!switchcreated){
+      $("#modeselect").change(function() {
+        var ddl = document.getElementById("modeselect"); 
+        Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]].mode = ddl.value;
+        var name = names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])];
+        var obj ="{\"" + name + "\":" + JSON.stringify(Modes[names[RGBButtons.index(document.getElementsByClassName("btn-info")[0])]]) + "}"
+        var set = JSON.parse(obj);
+             console.log(set);
+        socket.emit("LightSetting", set);
+      });
+    }
+
+    switchcreated = true;
   });
 
 function init(){
@@ -84,6 +92,8 @@ function setRGBValue(index){
   if(index.classList.contains("btn-info")){
     $("#flat").spectrum("set", Lights[names[RGBButtons.index(index)]].RGB);
     var ddl = document.getElementById("modeselect");
-    ddl.value = Modes[names[RGBButtons.index(index)]].mode;
+  ddl.value = Modes[names[RGBButtons.index(index)]].mode;
+    //ddl.options[RGBButtons.index(document.getElementsByClassName("btn-info")[0])].selected = 'selected';
   }
+  
 }
