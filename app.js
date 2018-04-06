@@ -112,7 +112,8 @@ async function fademode(data, key){
                     seprgb[schema[i][0]] ++;
                     var send = "{\"LightisOn\":1,\"RGB\":[" + Math.round(seprgb[0] * seprgb[3] / 255) +"," + Math.round(seprgb[1] * seprgb[3] / 255) + "," + Math.round(seprgb[2] * seprgb[3] / 255) + "]}"
                     client.publish(key[0].toLowerCase(),send);
-                await sleep(50);
+		    console.log(send);
+                await sleep(200);
                 }
             } 
             for (let it = 0; it < 255; it++) {
@@ -125,12 +126,11 @@ async function fademode(data, key){
                     seprgb[schema[i][1]] --;
                     var send = "{\"LightisOn\":1,\"RGB\":[" + Math.round(seprgb[0]  * seprgb[3] / 255) +"," + Math.round(seprgb[1]  * seprgb[3] / 255) + "," + Math.round(seprgb[2]  * seprgb[3] / 255) + "]}"
                     client.publish(key[0].toLowerCase(),send);
-                await sleep(50);
+		    console.log(send);
+                await sleep(200);
                 }
-            }      
-                
+            }
         }
-        console.log("test");
     }
     console.log("worked");
     return;
