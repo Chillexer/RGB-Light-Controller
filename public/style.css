@@ -67,7 +67,8 @@ li {
     max-height: 80%;
     max-width: 65%;
 }
-.content:hover{
+
+.content:hover {
     cursor: pointer;
 }
 
@@ -168,7 +169,8 @@ i {
     vertical-align: middle;
     background: #007bff;
 }
-.content-nopadding-right{
+
+.content-nopadding-right {
     position: absolute;
     height: 100%;
     margin-top: 10%;

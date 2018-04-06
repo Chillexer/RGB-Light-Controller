@@ -1,1 +1,10 @@
-{"Bord":{"LightisOn":false,"RGB":"rgb(79, 79, 17)"},"Seng":{"LightisOn":false,"RGB":"rgb(17, 25, 14)"}}
+{
+    "Bord": {
+        "LightisOn": false,
+        "RGB": "rgb(79, 79, 17)"
+    },
+    "Seng": {
+        "LightisOn": false,
+        "RGB": "rgb(17, 25, 14)"
+    }
+}
